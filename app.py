@@ -17,7 +17,7 @@ CORS(app)
 db = mongo.db.users
 
 @app.route('/users', methods=["POST"])
-# Route is gonna creeate user and return id
+# Func is gonna create user and return id
 def createUser():
   id = db.insert({
       "name": request.json['name'],
@@ -26,9 +26,19 @@ def createUser():
   })
   return jsonify(str(ObjectId(id)))
 
-@app.route('/users', methods=["GET"])
+
+@app.route('/users', methods=['GET'])
 def getUsers():
-  return 'something'
+# Func is gonna list all users in the database
+  users = []
+  for doc in db.find():
+      users.append({
+          '_id': str(ObjectId(doc['_id'])),
+          'name': doc['name'],
+          'email': doc['email'],
+          'password': doc['password']
+      })
+  return jsonify(users)
 
 @app.route('/users/<id>', methods=["GET"])
 def getUser():

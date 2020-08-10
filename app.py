@@ -36,13 +36,19 @@ def getUsers():
           '_id': str(ObjectId(doc['_id'])),
           'name': doc['name'],
           'email': doc['email'],
-          'password': doc['password']
       })
   return jsonify(users)
 
-@app.route('/users/<id>', methods=["GET"])
-def getUser():
-  return 'something'
+
+@app.route('/user/<id>', methods=["GET"])
+def getUser(id):
+# Func is gonna list user by _id
+  user = db.find_one({'_id': ObjectId(id)})
+  return jsonify({
+      '_id': str(ObjectId(user['_id'])),
+      'name': user['name'],
+      'email': user['email'],
+  })
 
 @app.route('/users/<id>', methods=["GET"])
 def deleteUser():

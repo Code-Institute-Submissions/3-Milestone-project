@@ -16,6 +16,8 @@ mongo = PyMongo(app)
 CORS(app)
 db = mongo.db.users
 
+
+# Routes
 @app.route('/users', methods=["POST"])
 # Func is gonna create user and return id
 def createUser():
@@ -59,9 +61,18 @@ def deleteUser(id):
     'message': 'User has been deleted'
   })
 
-@app.route('/users/<id>', methods=["PUT"])
-def updateUser():
-  return 'something'
+
+@app.route('/users/<id>', methods=['PUT'])
+def updateUser(id):
+# Func is gonna update user by _id
+  db.update_one({'_id': ObjectId(id)}, {"$set": {
+    'name': request.json['name'],
+    'email': request.json['email'],
+    'password': request.json['password']
+  }})
+  return jsonify({
+    'message': 'User has been updated'
+  })
 
 if __name__ == "__main__":
     app.run(debug=True)

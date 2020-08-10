@@ -14,10 +14,27 @@ app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 mongo = PyMongo(app)
 
 CORS(app)
+db = mongo.db.users
 
-@app.route('/', methods=["GET","POST"])
-def getpost():
+@app.route('/users', methods=["POST"])
+def createUser():
   return 'something'
 
+@app.route('/users', methods=["GET"])
+def getUsers():
+  return 'something'
 
-app.run(debug=True)
+@app.route('/users/<id>', methods=["GET"])
+def getUser():
+  return 'something'
+
+@app.route('/users/<id>', methods=["GET"])
+def deleteUser():
+  return 'something'
+
+@app.route('/users/<id>', methods=["PUT"])
+def updateUser():
+  return 'something'
+
+if __name__ == "__main__":
+    app.run(debug=True)

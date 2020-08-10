@@ -20,9 +20,9 @@ db = mongo.db.users
 # Func is gonna create user and return id
 def createUser():
   id = db.insert({
-      "name": request.json['name'],
-      "email": request.json['email'],
-      "password": request.json['password']
+    "name": request.json['name'],
+    "email": request.json['email'],
+    "password": request.json['password']
   })
   return jsonify(str(ObjectId(id)))
 
@@ -32,11 +32,11 @@ def getUsers():
 # Func is gonna list all users in the database
   users = []
   for doc in db.find():
-      users.append({
-          '_id': str(ObjectId(doc['_id'])),
-          'name': doc['name'],
-          'email': doc['email'],
-      })
+    users.append({
+      '_id': str(ObjectId(doc['_id'])),
+      'name': doc['name'],
+      'email': doc['email'],
+    })
   return jsonify(users)
 
 
@@ -45,14 +45,19 @@ def getUser(id):
 # Func is gonna list user by _id
   user = db.find_one({'_id': ObjectId(id)})
   return jsonify({
-      '_id': str(ObjectId(user['_id'])),
-      'name': user['name'],
-      'email': user['email'],
+    '_id': str(ObjectId(user['_id'])),
+    'name': user['name'],
+    'email': user['email'],
   })
 
-@app.route('/users/<id>', methods=["GET"])
-def deleteUser():
-  return 'something'
+
+@app.route('/users/<id>', methods=['DELETE'])
+# Func is gonna delete user by _id
+def deleteUser(id):
+  db.delete_one({'_id': ObjectId(id)})
+  return jsonify({
+    'message': 'User has been deleted'
+  })
 
 @app.route('/users/<id>', methods=["PUT"])
 def updateUser():

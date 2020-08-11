@@ -54,8 +54,8 @@ def getUser(id):
 
 
 @app.route('/users/<id>', methods=['DELETE'])
-# Func is gonna delete user by _id
 def deleteUser(id):
+# Func is gonna delete user by _id
   db.delete_one({'_id': ObjectId(id)})
   return jsonify({
     'message': 'User has been deleted'

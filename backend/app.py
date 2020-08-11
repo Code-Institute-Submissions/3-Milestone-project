@@ -14,64 +14,70 @@ app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 mongo = PyMongo(app)
 
 CORS(app)
-db = mongo.db.users
+db = mongo.db.patients
 
 
 # Routes
-@app.route('/users', methods=["POST"])
-# Func is gonna create user and return id
+@app.route('/patients', methods=["POST"])
+# Func is gonna create patient and return id
 def createUser():
     id = db.insert({
-      "name": request.json['name'],
-      "email": request.json['email'],
-      "password": request.json['password']
+        "name_and_surname": request.json['name_and_surname'],
+        "address": request.json['address'],
+        "phone_number": request.json['phone_number'],
+        "date_of_birth": request.json['date_of_birth']
     })
     return jsonify(str(ObjectId(id)))
 
 
-@app.route('/users', methods=['GET'])
+@app.route('/patients', methods=['GET'])
 def getUsers():
-# Func is gonna list all users in the database
-    users = []
+# Func is gonna list all patients in the database
+    patient = []
     for doc in db.find():
-      users.append({
-        '_id': str(ObjectId(doc['_id'])),
-        'name': doc['name'],
-        'email': doc['email'],
+        patient.append({
+            '_id': str(ObjectId(doc['_id'])),
+            'name_and_surname': doc['name_and_surname'],
+            'address': doc['address'],
+            "phone_number": doc['phone_number'],
+            "date_of_birth": doc['date_of_birth']
       })
-    return jsonify(users)
+    return jsonify(patient)
 
 
-@app.route('/user/<id>', methods=["GET"])
+@app.route('/patient/<id>', methods=["GET"])
 def getUser(id):
-# Func is gonna list user by _id
-    user = db.find_one({'_id': ObjectId(id)})
+# Func is gonna list patient by _id
+    patient = db.find_one({'_id': ObjectId(id)})
     return jsonify({
-      '_id': str(ObjectId(user['_id'])),
-      'name': user['name'],
-      'email': user['email'],
+        '_id': str(ObjectId(patient['_id'])),
+        'name_and_surname': patient['name_and_surname'],
+        'address': patient['address'],
+        "phone_number": patient['phone_number'],
+        "date_of_birth": patient['date_of_birth']
     })
 
 
-@app.route('/users/<id>', methods=['DELETE'])
+@app.route('/patients/<id>', methods=['DELETE'])
 def deleteUser(id):
-# Func is gonna delete user by _id
-    db.delete_one({'_id': ObjectId(id)})
-    return jsonify({
-      'message': 'User has been deleted'
+# Func is gonna delete patient by _id
+      db.delete_one({'_id': ObjectId(id)})
+      return jsonify({
+          'message': 'Patient has been deleted'
     })
 
 
-@app.route('/users/<id>', methods=['PUT'])
+@app.route('/patients/<id>', methods=['PUT'])
 def updateUser(id):
-# Func is gonna update user by _id
+# Func is gonna update patient by _id
     db.update_one({'_id': ObjectId(id)}, {"$set": {
-      'name': request.json['name'],
-      'email': request.json['email'],
-      'password': request.json['password']
+        'name_and_surname': request.json['name_and_surname'],
+        'address': request.json['address'],
+        "phone_number": request.json['phone_number'],
+        "date_of_birth": request.json['date_of_birth']
     }})
     return jsonify({
-      'message': 'User has been updated'
+        'message': 'Patient has been updated'
     })
 
 if __name__ == "__main__":

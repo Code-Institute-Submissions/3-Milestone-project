@@ -10,7 +10,20 @@ const Patient: React.FC = () => {
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
-    console.log(newName, address, number, date);
+    const response = await fetch('http://localhost:5000/patients', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        name_and_surname: newName,
+        address,
+        phone_number: number,
+        date_of_birth: date,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
   }
 
   return (

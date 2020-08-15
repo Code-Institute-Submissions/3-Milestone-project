@@ -11,7 +11,9 @@ const App: React.FC = () => (
     <GlobalStyle />
     <Router>
       <Navbar />
-      <Routes />
+      <div className="container p-2">
+        <Routes />
+      </div>
     </Router>
   </>
 );

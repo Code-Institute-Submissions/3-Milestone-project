@@ -13,3 +13,8 @@ const Routes: React.FC = () => (
 );
 
 export default Routes;
+
+/**
+ *  Routes responsible for the navigation inside the app.
+ *  Export your routes to "App.tsx".
+ */

@@ -1,12 +1,16 @@
 import React, { useState, FormEvent } from 'react';
 
-const Patient: React.FC = () => {
+const CreatePatient: React.FC = () => {
   const [newName, setName] = useState('');
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [date, setDate] = useState('');
 
   async function handleSubmit(
+    /**
+     *  Func responsible for get the api and add patient submited
+     *  in the input.
+     */
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
@@ -28,7 +32,7 @@ const Patient: React.FC = () => {
 
   return (
     <>
-      <div className="column">
+      <div className="row">
         <div className="col-md-12">
           <h1>Create Patient</h1>
           <form onSubmit={handleSubmit} className="card card-body">
@@ -78,12 +82,9 @@ const Patient: React.FC = () => {
             </button>
           </form>
         </div>
-        <div className="col md-8">
-          <></>
-        </div>
       </div>
     </>
   );
 };
 
-export default Patient;
+export default CreatePatient;

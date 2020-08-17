@@ -1,10 +1,41 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
+
+interface Patients {
+  _id: string;
+  name_and_surname: string;
+  address: string;
+  phone_number: string;
+  date_of_birth: string;
+}
 
 const CreatePatient: React.FC = () => {
   const [newName, setName] = useState('');
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [date, setDate] = useState('');
+
+  const [patients, setPatients] = useState<Patients[]>(() => {
+    const storagedPatients = localStorage.getItem('@clinicDatabase:patients');
+
+    if (storagedPatients) {
+      return JSON.parse(storagedPatients);
+    }
+    return [];
+  });
+
+  async function getPatients(): Promise<void> {
+    /**
+     *  Func get patients from the API in order to
+     *  display it in the screen.
+     */
+    const response = await fetch('http://localhost:5000/patients');
+    const data = await response.json();
+    setPatients(data);
+  }
+
+  useEffect(() => {
+    getPatients();
+  }, []);
 
   async function handleSubmit(
     /**
@@ -28,6 +59,7 @@ const CreatePatient: React.FC = () => {
     });
     const data = await response.json();
     console.log(data);
+    getPatients();
   }
 
   return (

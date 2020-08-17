@@ -9,10 +9,6 @@ interface Patients {
 }
 
 const ListPatient: React.FC = () => {
-  /**
-   *  Func get patients from the API in order to
-   *  display it in the screen.
-   */
   const [patients, setPatients] = useState<Patients[]>(() => {
     const storagedPatients = localStorage.getItem('@clinicDatabase:patients');
 
@@ -23,6 +19,10 @@ const ListPatient: React.FC = () => {
   });
 
   async function getPatients(): Promise<void> {
+    /**
+     *  Func get patients from the API in order to
+     *  display it in the screen.
+     */
     const response = await fetch('http://localhost:5000/patients');
     const data = await response.json();
     setPatients(data);
@@ -31,6 +31,22 @@ const ListPatient: React.FC = () => {
   useEffect(() => {
     getPatients();
   }, []);
+
+  const deletePatients = async (id: string): Promise<void> => {
+    /**
+     *  Func delete patients from the database
+     *  and ask if you really want it.
+     */
+    const patientResponse = window.confirm('Are you want to delete patient?');
+    if (patientResponse) {
+      const response = await fetch(`http://localhost:5000/patients/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      console.log(data);
+      getPatients();
+    }
+  };
 
   return (
     <>
@@ -52,6 +68,21 @@ const ListPatient: React.FC = () => {
                 <td>{patient.address}</td>
                 <td>{patient.phone_number}</td>
                 <td>{patient.date_of_birth}</td>
+                <td>
+                  <button
+                    className="btn btn-primary btn-sm btn-block"
+                    type="submit"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn btn-danger btn-sm btn-block"
+                    type="submit"
+                    onClick={e => deletePatients(patient._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

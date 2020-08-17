@@ -16,7 +16,6 @@ const CreatePatient: React.FC = () => {
 
   const [patients, setPatients] = useState<Patients[]>(() => {
     const storagedPatients = localStorage.getItem('@clinicDatabase:patients');
-
     if (storagedPatients) {
       return JSON.parse(storagedPatients);
     }
@@ -33,9 +32,33 @@ const CreatePatient: React.FC = () => {
     setPatients(data);
   }
 
+  const deletePatients = async (id: string): Promise<void> => {
+    /**
+     *  Func delete patients from the database
+     *  and ask if you really want it.
+     */
+    const patientResponse = window.confirm('Are you sure to delete patient?');
+    if (patientResponse) {
+      const response = await fetch(`http://localhost:5000/patients/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      console.log(data);
+      getPatients();
+    }
+  };
+
   useEffect(() => {
     getPatients();
   }, []);
+
+  const editPatients = async (id: string): Promise<void> => {
+    const response = await fetch(`http://localhost:5000/patient/${id}`);
+    const data = await response.json();
+    console.log(data);
+
+    setName(data.name_and_surname);
+  };
 
   async function handleSubmit(
     /**
@@ -113,6 +136,45 @@ const CreatePatient: React.FC = () => {
               Create
             </button>
           </form>
+        </div>
+        <div className="rcol md-12">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Name and Surname</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Date of Birth</th>
+                <th>Operations</th>
+              </tr>
+            </thead>
+            <tbody>
+              {patients.map(patient => (
+                <tr key={patient._id}>
+                  <td>{patient.name_and_surname}</td>
+                  <td>{patient.address}</td>
+                  <td>{patient.phone_number}</td>
+                  <td>{patient.date_of_birth}</td>
+                  <td>
+                    <button
+                      className="btn btn-primary btn-sm btn-block"
+                      type="submit"
+                      onClick={e => editPatients(patient._id)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-danger btn-sm btn-block"
+                      type="submit"
+                      onClick={e => deletePatients(patient._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </>

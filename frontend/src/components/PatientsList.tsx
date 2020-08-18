@@ -4,7 +4,7 @@ import React, { useState, FormEvent, useEffect } from 'react';
 interface Patients {
   _id: string;
   name_and_surname: string;
-  address: string;
+  eircode: string;
   phone_number: string;
   date_of_birth: string;
 }
@@ -75,7 +75,7 @@ const CreatePatient: React.FC = () => {
     setId(data._id);
 
     setName(data.name_and_surname);
-    setAddress(data.address);
+    setAddress(data.eircode);
     setNumber(data.phone_number);
     setDate(data.date_of_birth);
   };
@@ -100,7 +100,7 @@ const CreatePatient: React.FC = () => {
         body: JSON.stringify({
           /* eslint-disable no-underscore-dangle */
           name_and_surname: newName,
-          address,
+          eircode: address,
           phone_number: number,
           date_of_birth: date,
         }),
@@ -115,7 +115,7 @@ const CreatePatient: React.FC = () => {
         },
         body: JSON.stringify({
           name_and_surname: newName,
-          address,
+          eircode: address,
           phone_number: number,
           date_of_birth: date,
         }),
@@ -205,7 +205,7 @@ const CreatePatient: React.FC = () => {
               {patients.map(patient => (
                 <tr key={patient._id}>
                   <td>{patient.name_and_surname}</td>
-                  <td>{patient.address}</td>
+                  <td>{patient.eircode}</td>
                   <td>{patient.phone_number}</td>
                   <td>{patient.date_of_birth}</td>
                   <td>

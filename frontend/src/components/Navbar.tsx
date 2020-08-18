@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
         <Link className="navbar-brand" to="/">
           Helth Clinic
         </Link>
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <div className="collapse form-inline" id="navbarTogglerDemo03">
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item">
               <Link className="nav-link" to="/">

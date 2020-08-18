@@ -23,7 +23,7 @@ db = mongo.db.patients
 def createUser():
     id = db.insert({
         "name_and_surname": request.json['name_and_surname'],
-        "address": request.json['address'],
+        "eircode": request.json['eircode'],
         "phone_number": request.json['phone_number'],
         "date_of_birth": request.json['date_of_birth']
     })
@@ -38,7 +38,7 @@ def getUsers():
         patient.append({
             '_id': str(ObjectId(doc['_id'])),
             'name_and_surname': doc['name_and_surname'],
-            'address': doc['address'],
+            'eircode': doc['eircode'],
             "phone_number": doc['phone_number'],
             "date_of_birth": doc['date_of_birth']
       })
@@ -52,7 +52,7 @@ def getUser(id):
     return jsonify({
         '_id': str(ObjectId(patient['_id'])),
         'name_and_surname': patient['name_and_surname'],
-        'address': patient['address'],
+        'eircode': patient['eircode'],
         "phone_number": patient['phone_number'],
         "date_of_birth": patient['date_of_birth']
     })
@@ -72,7 +72,7 @@ def updateUser(id):
 # Func is gonna update patient by _id
     db.update_one({'_id': ObjectId(id)}, {"$set": {
         'name_and_surname': request.json['name_and_surname'],
-        'address': request.json['address'],
+        'eircode': request.json['eircode'],
         "phone_number": request.json['phone_number'],
         "date_of_birth": request.json['date_of_birth']
     }})

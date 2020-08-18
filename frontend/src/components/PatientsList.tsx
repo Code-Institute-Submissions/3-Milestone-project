@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { useState, FormEvent, useEffect } from 'react';
 
 interface Patients {
@@ -13,6 +14,9 @@ const CreatePatient: React.FC = () => {
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [date, setDate] = useState('');
+
+  const [editing, setEditing] = useState(false);
+  const [newId, setId] = useState(false);
 
   const [patients, setPatients] = useState<Patients[]>(() => {
     const storagedPatients = localStorage.getItem('@clinicDatabase:patients');
@@ -30,6 +34,11 @@ const CreatePatient: React.FC = () => {
     const response = await fetch('http://localhost:5000/patients');
     const data = await response.json();
     setPatients(data);
+
+    setName('');
+    setAddress('');
+    setNumber('');
+    setDate('');
   }
 
   const deletePatients = async (id: string): Promise<void> => {
@@ -53,40 +62,79 @@ const CreatePatient: React.FC = () => {
   }, []);
 
   const editPatients = async (id: string): Promise<void> => {
+    /**
+     *  This func allows to when clicking in edit it will show the data
+     *  referent the use you've seleted in order to update.
+     */
     const response = await fetch(`http://localhost:5000/patient/${id}`);
     const data = await response.json();
     console.log(data);
 
+    setEditing(true);
+    /* eslint-disable no-underscore-dangle */
+    setId(data._id);
+
     setName(data.name_and_surname);
+    setAddress(data.address);
+    setNumber(data.phone_number);
+    setDate(data.date_of_birth);
   };
 
   async function handleSubmit(
     /**
      *  Func responsible for get the api and add patient submited
      *  in the input.
+     *
+     *  When clicking in edit this func send the request method "PUT"
+     *  in oder to edit the data.
      */
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
-    const response = await fetch('http://localhost:5000/patients', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        name_and_surname: newName,
-        address,
-        phone_number: number,
-        date_of_birth: date,
-      }),
-    });
-    const data = await response.json();
-    console.log(data);
-    getPatients();
+    if (!editing) {
+      const response = await fetch('http://localhost:5000/patients', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          /* eslint-disable no-underscore-dangle */
+          name_and_surname: newName,
+          address,
+          phone_number: number,
+          date_of_birth: date,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } else {
+      const response = await fetch(`http://localhost:5000/patients/${newId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name_and_surname: newName,
+          address,
+          phone_number: number,
+          date_of_birth: date,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    }
+    await getPatients();
+
+    setName('');
+    setAddress('');
+    setNumber('');
+    setDate('');
   }
 
   return (
     <>
+      {/* Creation Form */}
+
       <div className="row">
         <div className="col-md-12">
           <h1>Create Patient</h1>
@@ -108,8 +156,8 @@ const CreatePatient: React.FC = () => {
                 type="text"
                 onChange={e => setAddress(e.target.value)}
                 value={address}
-                className="form-control"
-                placeholder="Adress"
+                className="form-control md-form md-outline input-with-post-icon datepicker"
+                placeholder="Eirode"
               />
             </div>
             <div className="form-group">
@@ -128,16 +176,19 @@ const CreatePatient: React.FC = () => {
                 type="date"
                 onChange={e => setDate(e.target.value)}
                 value={date}
-                className="form-control"
-                placeholder="Date-of-bird"
+                className="form-control  col-3"
+                placeholder="Date-of-birth"
               />
             </div>
             <button className="btn btn-primary btn-block" type="submit">
-              Create
+              Submit
             </button>
           </form>
         </div>
-        <div className="rcol md-12">
+
+        {/* Patient List */}
+
+        <div className="col md-12">
           <table className="table table-striped">
             <thead>
               <tr>

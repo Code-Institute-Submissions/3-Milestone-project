@@ -16,7 +16,7 @@ const CreatePatient: React.FC = () => {
   const [date, setDate] = useState('');
 
   const [editing, setEditing] = useState(false);
-  const [newId, setId] = useState(false);
+  const [newId, setId] = useState('');
 
   const [patients, setPatients] = useState<Patients[]>(() => {
     const storagedPatients = localStorage.getItem('@clinicDatabase:patients');
@@ -122,6 +122,8 @@ const CreatePatient: React.FC = () => {
       });
       const data = await response.json();
       console.log(data);
+      setEditing(false);
+      setId('');
     }
     await getPatients();
 
@@ -181,7 +183,7 @@ const CreatePatient: React.FC = () => {
               />
             </div>
             <button className="btn btn-primary btn-block" type="submit">
-              Submit
+              {editing ? 'Update' : 'Create'}
             </button>
           </form>
         </div>

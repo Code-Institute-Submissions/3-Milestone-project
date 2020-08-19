@@ -120,10 +120,13 @@ const CreatePatient: React.FC = () => {
           date_of_birth: date,
         }),
       });
+      const alert = window.alert('Patient has been updated!');
       const data = await response.json();
       console.log(data);
       setEditing(false);
       setId('');
+
+      return alert;
     }
     await getPatients();
 
@@ -169,7 +172,7 @@ const CreatePatient: React.FC = () => {
                 onChange={e => setNumber(e.target.value)}
                 value={number}
                 className="form-control"
-                placeholder="Phone number"
+                placeholder="+353xxxxxxxxx"
               />
             </div>
             <div className="form-group">
@@ -191,23 +194,25 @@ const CreatePatient: React.FC = () => {
         {/* Patient List */}
 
         <div className="col md-12">
-          <table className="table table-striped">
+          <table className="table">
             <thead>
               <tr>
-                <th>Name and Surname</th>
-                <th>Address</th>
-                <th>Phone Number</th>
-                <th>Date of Birth</th>
+                <th>Name</th>
+                <th className="d-none d-sm-block">Address</th>
+                <th className="">Phone</th>
+                <th className="k">Birthday</th>
                 <th>Operations</th>
               </tr>
             </thead>
             <tbody>
               {patients.map(patient => (
                 <tr key={patient._id}>
-                  <td>{patient.name_and_surname}</td>
-                  <td>{patient.eircode}</td>
-                  <td>{patient.phone_number}</td>
-                  <td>{patient.date_of_birth}</td>
+                  <td style={{ fontSize: '15px' }}>
+                    {patient.name_and_surname}
+                  </td>
+                  <td className="d-none d-sm-block">{patient.eircode}</td>
+                  <td style={{ fontSize: '10px' }}>{patient.phone_number}</td>
+                  <td style={{ fontSize: '10px' }}>{patient.date_of_birth}</td>
                   <td>
                     <button
                       className="btn btn-primary btn-sm btn-block"

@@ -21,3 +21,8 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 `;
+
+/**
+ *  Global styles in the app export to App.tsx
+ *
+ */

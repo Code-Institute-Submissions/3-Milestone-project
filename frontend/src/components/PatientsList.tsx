@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { useState, FormEvent, useEffect } from 'react';
 
@@ -152,6 +153,7 @@ const CreatePatient: React.FC = () => {
                 value={newName}
                 className="form-control"
                 placeholder="Name and surname"
+                required
               />
             </div>
 
@@ -163,6 +165,7 @@ const CreatePatient: React.FC = () => {
                 value={address}
                 className="form-control md-form md-outline input-with-post-icon datepicker"
                 placeholder="Eirode"
+                required
               />
             </div>
             <div className="form-group">
@@ -173,6 +176,7 @@ const CreatePatient: React.FC = () => {
                 value={number}
                 className="form-control"
                 placeholder="+353xxxxxxxxx"
+                required
               />
             </div>
             <div className="form-group">
@@ -183,6 +187,7 @@ const CreatePatient: React.FC = () => {
                 value={date}
                 className="form-control  col-3"
                 placeholder="Date-of-birth"
+                required
               />
             </div>
             <button className="btn btn-primary btn-block" type="submit">

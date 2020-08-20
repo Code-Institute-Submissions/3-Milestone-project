@@ -1,6 +1,8 @@
 /* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { useState, FormEvent, useEffect } from 'react';
+// adittional css styles
+import { Container } from '../styles/PatientList';
 
 interface Patients {
   _id: string;
@@ -140,106 +142,108 @@ const CreatePatient: React.FC = () => {
   return (
     <>
       {/* Creation Form */}
+      <Container>
+        <div className="row">
+          <div className="col-md-12">
+            <h1>Create Patient</h1>
+            <form onSubmit={handleSubmit} className="card card-body">
+              <div className="form-group">
+                <h2>Name and Surname</h2>
+                <input
+                  type="text"
+                  onChange={e => setName(e.target.value)}
+                  value={newName}
+                  className="form-control"
+                  placeholder="Name and surname"
+                  required
+                />
+              </div>
 
-      <div className="row">
-        <div className="col-md-12">
-          <h1>Create Patient</h1>
-          <form onSubmit={handleSubmit} className="card card-body">
-            <div className="form-group">
-              <h2>Name and Surname</h2>
-              <input
-                type="text"
-                onChange={e => setName(e.target.value)}
-                value={newName}
-                className="form-control"
-                placeholder="Name and surname"
-                required
-              />
-            </div>
+              <div className="form-group">
+                <h2>Address</h2>
+                <input
+                  type="text"
+                  onChange={e => setAddress(e.target.value)}
+                  value={address}
+                  className="form-control md-form md-outline input-with-post-icon datepicker"
+                  placeholder="Eirode"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <h2>Phone Number</h2>
+                <input
+                  type="number"
+                  onChange={e => setNumber(e.target.value)}
+                  value={number}
+                  className="form-control"
+                  placeholder="+353xxxxxxxxx"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <h2>Date of Birth</h2>
+                <input
+                  type="date"
+                  onChange={e => setDate(e.target.value)}
+                  value={date}
+                  className="form-control  col-3"
+                  placeholder="Date-of-birth"
+                  required
+                />
+              </div>
+              <button className="btn btn-primary btn-block" type="submit">
+                {editing ? 'Update' : 'Create'}
+              </button>
+            </form>
+          </div>
 
-            <div className="form-group">
-              <h2>Address</h2>
-              <input
-                type="text"
-                onChange={e => setAddress(e.target.value)}
-                value={address}
-                className="form-control md-form md-outline input-with-post-icon datepicker"
-                placeholder="Eirode"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <h2>Phone Number</h2>
-              <input
-                type="number"
-                onChange={e => setNumber(e.target.value)}
-                value={number}
-                className="form-control"
-                placeholder="+353xxxxxxxxx"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <h2>Date of Birth</h2>
-              <input
-                type="date"
-                onChange={e => setDate(e.target.value)}
-                value={date}
-                className="form-control  col-3"
-                placeholder="Date-of-birth"
-                required
-              />
-            </div>
-            <button className="btn btn-primary btn-block" type="submit">
-              {editing ? 'Update' : 'Create'}
-            </button>
-          </form>
-        </div>
-
-        {/* Patient List */}
-
-        <div className="col md-12">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th className="d-none d-sm-block">Address</th>
-                <th className="">Phone</th>
-                <th className="k">Birthday</th>
-                <th>Operations</th>
-              </tr>
-            </thead>
-            <tbody>
-              {patients.map(patient => (
-                <tr key={patient._id}>
-                  <td style={{ fontSize: '15px' }}>
-                    {patient.name_and_surname}
-                  </td>
-                  <td className="d-none d-sm-block">{patient.eircode}</td>
-                  <td style={{ fontSize: '10px' }}>{patient.phone_number}</td>
-                  <td style={{ fontSize: '10px' }}>{patient.date_of_birth}</td>
-                  <td>
-                    <button
-                      className="btn btn-primary btn-sm btn-block"
-                      type="submit"
-                      onClick={e => editPatients(patient._id)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btn btn-danger btn-sm btn-block"
-                      type="submit"
-                      onClick={e => deletePatients(patient._id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
+          {/* Patient List */}
+          <div className="col md-12">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th className="d-none d-sm-block">Address</th>
+                  <th className="">Phone</th>
+                  <th className="k">Birthday</th>
+                  <th>Operations</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {patients.map(patient => (
+                  <tr key={patient._id}>
+                    <td style={{ fontSize: '15px' }}>
+                      {patient.name_and_surname}
+                    </td>
+                    <td className="d-none d-sm-block">{patient.eircode}</td>
+                    <td style={{ fontSize: '10px' }}>{patient.phone_number}</td>
+                    <td style={{ fontSize: '10px' }}>
+                      {patient.date_of_birth}
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-primary btn-sm btn-block"
+                        type="submit"
+                        onClick={e => editPatients(patient._id)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn-danger btn-sm btn-block"
+                        type="submit"
+                        onClick={e => deletePatients(patient._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </Container>
     </>
   );
 };

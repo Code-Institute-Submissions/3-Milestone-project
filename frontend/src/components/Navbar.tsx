@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/" style={{ fontWeight: 400 }}>
           Helth Clinic
         </Link>
         <div className="collapse form-inline" id="navbarTogglerDemo03">

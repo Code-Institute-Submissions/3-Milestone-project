@@ -192,14 +192,14 @@ const CreatePatient: React.FC = () => {
                   required
                 />
               </div>
-              <button className="btn btn-primary btn-block" type="submit">
+              <button className="btn btn-success btn-block" type="submit">
                 {editing ? 'Update' : 'Create'}
               </button>
             </form>
           </div>
 
           {/* Patient List */}
-          <div className="col md-12">
+          <div className="col md-12" style={{ marginTop: '30px' }}>
             <table className="table">
               <thead>
                 <tr>
@@ -216,14 +216,19 @@ const CreatePatient: React.FC = () => {
                     <td style={{ fontSize: '15px' }}>
                       {patient.name_and_surname}
                     </td>
-                    <td className="d-none d-sm-block">{patient.eircode}</td>
+                    <td
+                      className="d-none d-sm-block"
+                      style={{ fontSize: '10px' }}
+                    >
+                      {patient.eircode}
+                    </td>
                     <td style={{ fontSize: '10px' }}>{patient.phone_number}</td>
                     <td style={{ fontSize: '10px' }}>
                       {patient.date_of_birth}
                     </td>
                     <td>
                       <button
-                        className="btn btn-primary btn-sm btn-block"
+                        className="btn btn-success btn-sm btn-block"
                         type="submit"
                         onClick={e => editPatients(patient._id)}
                       >

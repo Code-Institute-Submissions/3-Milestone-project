@@ -4,9 +4,11 @@ import { Switch, Route } from 'react-router-dom';
 
 import Help from '../components/Help';
 import PatientsList from '../components/PatientsList';
+import Welcome from '../components/Welcome';
 
 const Routes: React.FC = () => (
   <Switch>
+    <Route path="/welcome" exact component={Welcome} />
     <Route path="/help" exact component={Help} />
     <Route path="/" exact component={PatientsList} />
   </Switch>

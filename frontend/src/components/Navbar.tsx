@@ -5,38 +5,30 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <Link className="navbar-brand" to="/">
+          Helth Clinic
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
           data-toggle="collapse"
-          data-target="#navbarTogglerDemo03"
-          aria-controls="navbarTogglerDemo03"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <Link className="navbar-brand" to="/" style={{ fontWeight: 400 }}>
-          Helth Clinic
-        </Link>
-        <div className="collapse form-inline" id="navbarTogglerDemo03">
-          <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Link
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/" tabIndex={-1}>
-                Link
-              </a>
-            </li>
-          </ul>
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div className="navbar-nav">
+            <Link className="nav-link" to="/welcome">
+              Welcome
+              <span className="sr-only">(current)</span>
+            </Link>
+            <Link className="nav-link" to="/help">
+              Help
+            </Link>
+          </div>
         </div>
       </nav>
     </>

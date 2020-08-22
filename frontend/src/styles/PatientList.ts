@@ -22,4 +22,8 @@ export const Container = styled.section`
   button {
     font-weight: bold;
   }
+
+  input {
+    height: 35px;
+  }
 `;

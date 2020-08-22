@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Navbar: React.FC = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-sm navbar-light bg-light">
         <Link className="navbar-brand" to="/">
           Helth Clinic
         </Link>
@@ -21,8 +21,12 @@ const Navbar: React.FC = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <Link className="nav-link" to="/welcome">
+            <Link className="nav-link" to="/">
               Welcome
+              <span className="sr-only">(current)</span>
+            </Link>
+            <Link className="nav-link" to="/patient">
+              Home
               <span className="sr-only">(current)</span>
             </Link>
             <Link className="nav-link" to="/help">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AiFillGithub, AiFillInstagram, AiFillLinkedin } from 'react-icons/ai';
 // aditional css styles imported here
 import { Container } from '../styles/Welcome';
 
@@ -12,7 +13,7 @@ const Welcome: React.FC = () => {
           <br />
           <p>Database management interface as simple as ever!</p>
           <br />
-          <Link to="/" style={{ textDecoration: 'none' }}>
+          <Link to="/patient" style={{ textDecoration: 'none' }}>
             <button type="button" className="btn btn-success btn-lg btn-block">
               Get Started
             </button>
@@ -22,6 +23,21 @@ const Welcome: React.FC = () => {
               User Instructions
             </button>
           </Link>
+          <div className="col">
+            <div className="row" style={{ padding: '10px' }}>
+              <a href="https://github.com/diebraga" target="blank">
+                <AiFillGithub size={30} />
+              </a>
+              &nbsp; &nbsp;
+              <a href="https://www.instagram.com/diebraga/" target="blank">
+                <AiFillInstagram size={30} />
+              </a>
+              &nbsp; &nbsp;
+              <a href="https://www.linkedin.com/in/diebraga/" target="blank">
+                <AiFillLinkedin size={30} />
+              </a>
+            </div>
+          </div>
         </div>
       </Container>
     </>

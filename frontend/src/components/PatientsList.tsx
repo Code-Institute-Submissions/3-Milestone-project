@@ -49,7 +49,9 @@ const CreatePatient: React.FC = () => {
      *  Func delete patients from the database
      *  and ask if you really want it.
      */
-    const patientResponse = window.confirm('Are you sure to delete patient?');
+    const patientResponse = window.confirm(
+      `Are you sure to delete ${newName} patient?`,
+    );
     if (patientResponse) {
       const response = await fetch(`http://localhost:5000/patients/${id}`, {
         method: 'DELETE',
@@ -111,6 +113,9 @@ const CreatePatient: React.FC = () => {
       const data = await response.json();
       console.log(data);
     } else {
+      /**
+       *  Statment if is "editing" it's not gonna post.
+       */
       const response = await fetch(`http://localhost:5000/patients/${newId}`, {
         method: 'PUT',
         headers: {
@@ -123,7 +128,7 @@ const CreatePatient: React.FC = () => {
           date_of_birth: date,
         }),
       });
-      const alert = window.alert('Patient has been updated!');
+      const alert = window.alert(`Patient ${newName} has been updated!`);
       const data = await response.json();
       console.log(data);
       setEditing(false);
@@ -145,7 +150,7 @@ const CreatePatient: React.FC = () => {
       <Container>
         <div className="row">
           <div className="col-md-12">
-            <h1>Create Patient</h1>
+            <h1>{editing ? 'Update Patient' : 'Create Patient'}</h1>
             <form onSubmit={handleSubmit} className="card card-body">
               <div className="form-group">
                 <h2>Name and Surname</h2>
@@ -192,7 +197,15 @@ const CreatePatient: React.FC = () => {
                   required
                 />
               </div>
-              <button className="btn btn-success btn-block" type="submit">
+              <button
+                className="btn btn-success btn-block"
+                type="submit"
+                style={{
+                  height: '35px',
+                  marginBottom: '10px',
+                  fontSize: '13px',
+                }}
+              >
                 {editing ? 'Update' : 'Create'}
               </button>
             </form>

@@ -9,8 +9,7 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = os.getenv('MONGO_URI')
-
+app.config["MONGO_URI"] = 'mongodb://diebraga:mongo124676@cluster0-shard-00-00.xaaml.mongodb.net:27017,cluster0-shard-00-01.xaaml.mongodb.net:27017,cluster0-shard-00-02.xaaml.mongodb.net:27017/clinic_helth?ssl=true&replicaSet=atlas-182g99-shard-0&authSource=admin&retryWrites=true&w=majority'
 mongo = PyMongo(app)
 
 CORS(app)

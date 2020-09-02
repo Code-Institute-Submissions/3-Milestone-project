@@ -9,7 +9,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #F0F2F5 ;
+    background: linear-gradient(#dcf4fc, #076585) ;
+
     -webkit-font-smoothing: antialiased
   }
 
@@ -19,6 +20,10 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
+  }
+
+  :root {
+    background: linear-gradient(#076585, #49a5c4) ;
   }
 `;
 

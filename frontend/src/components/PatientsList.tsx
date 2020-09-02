@@ -116,7 +116,7 @@ const CreatePatient: React.FC = () => {
       /**
        *  Statment if is "editing" it's not gonna post.
        */
-      const response = await fetch(`http://localhost:5000/patients/${newId}`, {
+      const response = await fetch(`https://localhost:5000/patients/${newId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -148,9 +148,9 @@ const CreatePatient: React.FC = () => {
     <>
       {/* Creation Form */}
       <Container>
-        <div className="row">
-          <div className="col-md-12">
-            <h1>{editing ? 'Update Patient' : 'Create Patient'}</h1>
+        <h1>{editing ? 'Update Patient' : 'Create Patient'}</h1>
+        <div className="col-md-12">
+          <div className="row">
             <form onSubmit={handleSubmit} className="card card-body">
               <div className="form-group">
                 <h2>Name and Surname</h2>
@@ -212,33 +212,27 @@ const CreatePatient: React.FC = () => {
           </div>
 
           {/* Patient List */}
-          <div className="col md-12" style={{ marginTop: '30px' }}>
-            <table className="table">
+          <div className="col-md-12">
+            <table
+              className="table"
+              style={{ marginTop: '30px', color: 'white' }}
+            >
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th className="d-none d-sm-block">Address</th>
+                  <th className="">Address</th>
                   <th className="">Phone</th>
-                  <th className="k">Birthday</th>
+                  <th className="">Birthday</th>
                   <th>Operations</th>
                 </tr>
               </thead>
               <tbody>
                 {patients.map(patient => (
                   <tr key={patient._id}>
-                    <td style={{ fontSize: '15px' }}>
-                      {patient.name_and_surname}
-                    </td>
-                    <td
-                      className="d-none d-sm-block"
-                      style={{ fontSize: '10px' }}
-                    >
-                      {patient.eircode}
-                    </td>
-                    <td style={{ fontSize: '10px' }}>{patient.phone_number}</td>
-                    <td style={{ fontSize: '10px' }}>
-                      {patient.date_of_birth}
-                    </td>
+                    <td>{patient.name_and_surname}</td>
+                    <td className="small-hide">{patient.eircode}</td>
+                    <td className="small-hide">{patient.phone_number}</td>
+                    <td>{patient.date_of_birth}</td>
                     <td>
                       <button
                         className="btn btn-success btn-sm btn-block"

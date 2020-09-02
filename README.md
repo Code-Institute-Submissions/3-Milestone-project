@@ -90,7 +90,16 @@ Clinic Health / Patient Manegment <br />React App
   
   ## Structure
   
-  
+   <img src="assets/root.png" width="100" height="200"/>   <img src="assets/src.png" width="100" height="200"/> 
+    
+    Relevant files in the root directory:
+      build: static files for deployment
+      package.json: All packages and libraries to be instaled.
+    Under `frontend/src` you gonna find all the project's code source.
+      Under `frontend/src/components` you gonna find all components to be rendered in the app.
+      Under `frontend/src/styles` you gonna find all the CSS content for each component including a global style.
+      Under `frontend/src/styles` you gonna find all routes to navigate in the app.
+      
 ## Features
 
 - PatientList page "/patient" You can create a Patient filling out the form
@@ -167,7 +176,8 @@ but is fully responsive for mobile aswell the only difference is that
 in small sizes address field in the tavble is gonna be hidden. 
 
 App view:
-<img />
+   <img src="assets/view.png" width="365" height="200"/> <img src="assets/view2.png" width="365" height="200"/> 
+
 
 ## Testing
   ### Backend
@@ -178,6 +188,7 @@ App view:
   Request Create / Store `https://miles-pro-3.herokuapp.com/patients`
   As you can see after the first post request it returns the _id in the console
   it means the Patient has been created.
+  
    <img src="assets/create1.png" width="200" height="200"/> 
   
   Request Find All `https://miles-pro-3.herokuapp.com/patients`
@@ -232,6 +243,16 @@ App view:
 Form:
 JavaScript validation     
 If validation ensure if the input value is not empty "Required".
+Inputs Creation sending. returns the same data in the console listed in the
+backend test section "_id".
+
+Buttons update and delete 100% working returning in the console the same
+messages listed in the backend test section.
+
+Link buttons working directs user to the right place.
+Link Troggle Buttons working and fluid.
+
+Navbar Links working and responsive.
 
 ESlint: Tool that verify automatcally your JS code, preventing,
 fixing and reporting syntax errors, integrated with prettier
@@ -298,6 +319,20 @@ https://prettier.io/
   The App deployed online is slightly different from the one on github
   The one in my git repo is running on my localhost.
   The online one on my mongo remote URI.
+  
+  ### Acknowledgements
+
+- I received inspiration for this project from:
+  
+  https://github.com/  
+  https://codeinstitute.net/
+  https://rocketseat.com.br/
+  Book JavaScript Design Patterns. Addy Osmani.
+
+  
+## License
+
+- Free Open Source.
   
 
   

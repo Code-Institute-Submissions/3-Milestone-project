@@ -9,7 +9,7 @@ const Welcome: React.FC = () => {
     <>
       <Container>
         <div className="card card-body col-sx">
-          <h1>Helth Clinic</h1>
+          <h1>Health Clinic</h1>
           <br />
           <p>Database management interface as simple as ever!</p>
           <br />

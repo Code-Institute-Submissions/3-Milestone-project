@@ -32,16 +32,26 @@ Clinic Health / Patient Manegment <br />APIrest
   and server side ex: connect a mobile app to the API.
   
   ## Structure
-  
+    
+    app.py - runs the backend
+    .env.example - storage for your mongoDB key. (rename to ".env")
+    Procfile - requirements for Heroku deployment
+    requirements.txt - App's packages
+
+ <img src="assets/flask.png" width="100" height="200"/> 
+    
+    DB Model:
+
+ <img src="assets/db_model.png" width="200" height="200"/> 
+
 ## Features
 
-**Create and add Patient**
-**Find all Patients**
-**Find Patient by _ID**
-**Update Patient by _ID**
-**Delete Patient by _ID**
+    **Create and add Patient**
+    **Find all Patients**
+    **Find Patient by _ID**
+    **Update Patient by _ID**
+    **Delete Patient by _ID**
 
-  
  ## Technologies 
  
 - ☑️ **Flask** — Micro web framework written in Python.
@@ -54,7 +64,7 @@ Clinic Health / Patient Manegment <br />APIrest
 
 <h1 align="center">
 <br>
-  <img src="https://png2.cleanpng.com/sh/e3555e6b2a9b7c194d4865fc837d18c0/L0KzQYm3VcE5N5p6R91yc4Pzfri0kvVia6UyhNHwbz3tccfokBNzcaF5Rdh7b373PbL1hL1jaZRwRdd3ZIOwhcTskr1qdqUyTdNvZXa4R4bqUMk3bWIzUKI6NUG2SYO4VcI3PmY9TKQ6N0i7SXB3jvc=/kisspng-react-logo-javascript-front-and-back-ends-user-int-5afef575c096e1.8015139215266584217889.png" width="100" height="100" align="center"/><br>
+  <img src="https://png2.cleanpng.com/sh/e3555e6b2a9b7c194d4865fc837d18c0/L0KzQYm3VcE5N5p6R91yc4Pzfri0kvVia6UyhNHwbz3tccfokBNzcaF5Rdh7b373PbL1hL1jaZRwRdd3ZIOwhcTskr1qdqUyTdNvZXa4R4bqUMk3bWIzUKI6NUG2SYO4VcI3PmY9TKQ6N0i7SXB3jvc=/kisspng-react-logo-javascript-front-and-back-ends-user-int-5afef575c096e1.8015139215266584217889.png" width="100" height="100" align="center"/><br><br>
 Clinic Health / Patient Manegment <br />React App
 </h1>
 <h3 align="center">Frontend App That Fetchs the API</h3>
@@ -161,28 +171,43 @@ App view:
 
 ## Testing
   ### Backend
-  Manual tests using <a href="https://insomnia.rest/">Insomnia<a/> you can use <a>Postman</a>
+  Manual tests using <a href="https://insomnia.rest/">Insomnia<a/> you can use <a href="https://www.postman.com/">Postman</a>
   if you prefer to check the requests and responses.
   API endpoints:
   
   Request Create / Store `https://miles-pro-3.herokuapp.com/patients`
-  <img />
+  As you can see after the first post request it returns the _id in the console
+  it means the Patient has been created.
+   <img src="assets/create1.png" width="200" height="200"/> 
   
   Request Find All `https://miles-pro-3.herokuapp.com/patients`
-  <img />
+  The First picture represents the DB before the first Creation it returns none objects []
+  The second picture represents after the first creation it returns an array with all Patients.
+  
+   <img src="assets/get.png" width="200" height="200"/> <img src="assets/get.png" width="200" height="200"/> <img src="assets/get.png" width="200" height="200"/>
   
   Request Find By id `https://miles-pro-3.herokuapp.com/patient/+${_id}`
-  <img />
+  Pasting in the patient's params url the `_id` and seding GET returns specific 
+  patien in the DB.
+  
+  <img src="assets/getby.png" width="200" height="200"/>
 
   Request Delete By id `https://miles-pro-3.herokuapp.com/patients/+${_id}`
-  <img />
+  Pasting in the patient's params url the `_id` and sedind DELETE request returns a 
+  message as you can see The patient has been deleted succesfully.
+  "check on get request"
+
+  <img src="assets/delete.png" width="200" height="200"/>
 
   Request Update By id `https://miles-pro-3.herokuapp.com/patients/+${_id}`
-  <img />
+  Pasting in the patient's params url the `_id` and sedind PUT request after modify data
+  returns a message as you can see The patient has been updated succesfully.
+  "check on get request"
+
+  <img src="assets/update.png" width="200" height="200"/>
   
   ## Frontend
      <pre>
-   
    Functionality Testing.
    Route Links in the app are tested you can free navigate in the application.
    
@@ -225,10 +250,10 @@ https://prettier.io/
 ## Deployment 🚀🚀🚀
 
   ### Integrated Frontend
-  On Netlify: `https://health-clinic-code.netlify.app/`
+  On Netlify: https://health-clinic-code.netlify.app/
   
   ### Backend
-  On Heroku: `https://miles-pro-3.herokuapp.com/`
+  On Heroku: https://miles-pro-3.herokuapp.com/
   
   ### Local 
   Run In your Terminal in order to clone the repo to your local machine:

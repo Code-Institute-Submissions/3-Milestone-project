@@ -100,6 +100,9 @@ Clinic Health / Patient Manegment <br />React App
       Under `frontend/src/styles` you gonna find all the CSS content for each component including a global style.
       Under `frontend/src/styles` you gonna find all routes to navigate in the app.
       
+      Mockups on Figma:
+      https://www.figma.com/file/Jozivw6lTlnyoGz698cZCl/Milestone-3?node-id=0%3A1
+      
 ## Features
 
 - PatientList page "/patient" You can create a Patient filling out the form
